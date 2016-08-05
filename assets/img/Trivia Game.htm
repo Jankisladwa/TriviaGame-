@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)file:///Users/user/Desktop/TriviaGame-/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title> Trivia Game </title>
+
+<!-- jquery link -->
+   <script src="./Trivia Game_files/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<!-- CSS style sheets-->
+<link rel="stylesheet" href="./Trivia Game_files/reset.css">
+ <link rel="stylesheet" href="./Trivia Game_files/style.css">
+
+<!--JS script -->
+ <script src="./Trivia Game_files/trivia.js"></script>
+
+</head>
+
+<body>
+	<div class="row" id="container">
+<!-- Start Game Page -->
+		<div class="row" id="startGame" style="display: none;"> 
+			<p> Game of Thrones Trivia </p> 
+			<button id="start">Start</button>
+		</div>
+
+<!-- Game Content Page -->
+<div class="row" id="gameContent" style="display: none;"> 
+	<h1></h1>
+
+	<div>
+<!--Timer-->
+		<span id="show-number"><h2>0</h2></span>
+	</div>
+
+	<div class="Questions">
+<!--Questions 1 -->
+	<div class="1">
+	<h1> Question 1 </h1>
+	<h2> Who was the true lover of Brenly Baratheon?</h2>
+		<input type="radio" name="1" value="Wrong"> Mace Tyrell
+		<input type="radio" name="1" value="Wrong"> Margaery Tyrell
+		<input type="radio" name="1" value="Correct"> Loras Tyrell
+		<input type="radio" name="1" value="Wrong"> Brienne of Tarth
+	</div>
+<!--Questions 2 -->
+	<div class="2">
+	<h1> Question 2 </h1>
+	<h2> Which character betrayed Rob Stark??</h2>
+		<input type="radio" name="2" value="Wrong"> Ramsey Bolton
+		<input type="radio" name="2" value="Wrong"> Jaime Lannister
+		<input type="radio" name="2" value="Wrong"> Tywin Lannister
+		<input type="radio" name="2" value="Correct"> Roose Bolton
+	</div>
+<!--Questions 3 -->
+	<h1> Question 3 </h1>
+	<h2> Who trained Arya in Bravos?</h2>
+		<input type="radio" name="3" value="Correct"> No one
+		<input type="radio" name="3" value="Wrong"> Many faced Gods
+		<input type="radio" name="3" value="Wrong"> Waif
+		<input type="radio" name="3" value="Wrong"> Jagen H'ghar
+<!--Questions 4 -->
+	<h1> Question 4 </h1>
+	<h2> Which of the following is not the child of Cersie Lannister?</h2>
+		<input type="radio" name="4" value="Correct"> Lancel
+		<input type="radio" name="4" value="Wrong"> Joffery
+		<input type="radio" name="4" value="Wrong"> Tommen 
+		<input type="radio" name="4" value="Wrong"> Myrceila
+<!--Questions 5 -->
+	<h1> Question 5 </h1>
+	<h2> Who does Jon Snow fall in love with?</h2>
+		<input type="radio" name="5" value="Wrong"> Doreah
+		<input type="radio" name="5" value="Correct"> Ygritte
+		<input type="radio" name="5" value="Wrong"> Myrceila 
+		<input type="radio" name="5" value="Wrong"> Melisandre
+<!--Questions 6 -->
+	<h1> Question 6 </h1>
+	<h2> What is the name of Jon Snows uncle who went missing?</h2>
+		<input type="radio" name="6" value="Wrong"> Rickard
+		<input type="radio" name="6" value="Wrong"> Brandon
+		<input type="radio" name="6" value="Correct"> Benjon
+		<input type="radio" name="6" value="Wrong"> Rickon
+<!--Questions 7 -->
+	<h1> Question 7 </h1>
+	<h2>The Hounds real name is?</h2>
+		<input type="radio" name="7" value="Wrong"> Barriston Selmy
+		<input type="radio" name="7" value="Wrong"> Roose Bolton
+		<input type="radio" name="7" value="Wrong"> Sandoer Clegane
+		<input type="radio" name="7" value="Correct"> Gregor Clegane
+<!--Questions 8 -->
+	<h1> Question 8 </h1>
+	<h2>This "Game of Thrones" character knows nothing</h2>
+		<input type="radio" name="8" value="Correct"> Hodor
+		<input type="radio" name="8" value="Wrong"> Jon Snow
+		<input type="radio" name="8" value="Wrong"> Samvell Tarly
+		<input type="radio" name="8" value="Wrong"> Alliser Thorne
+
+	</div>
+
+<div>
+	<button id="done">Done</button>
+</div>
+</div>
+
+
+<!--Game Result Page -->
+<div class="row" id="gameResults" style=""> 
+<h1>Result</h1><br>
+
+
+<p>Correct Answers: <span id="correct">0</span></p>
+<p>Wrong Answers: <span id="wrong">0</span> </p>
+<p>Unaswered Questions: <span id="unanswered">8</span> </p>
+
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+  	
+  	$("#gameContent").hide();
+	$("#gameResults").hide();
+
+//starts the game - click handler
+  $("#start").click(function(){
+  	$("#gameContent").show();
+  	$("#startGame").hide();
+		
+	})
+
+});
+
+
+$("#gameResults").show();
+
+
+$("#done").click(function(){
+  	stop();
+  	showResult();
+		
+		}) 
+// shows the result when clicked on "done" or when timer ends
+ function showResult(){
+	$("#gameContent").hide();	
+  	$("#gameResults").show();
+
+//Question 1
+if ($("input[name=1]:checked").val() == undefined){
+	 unanswered++ 
+		}
+
+else if ($("input[name=1]:checked").val() == "Correct"){
+	correctAnswers++
+	$("#2").hide();
+	}
+
+else {	wrongAnswers++
+	}
+
+if ($("input[name=2]:checked").val() == undefined){
+	 unanswered++ 
+		}
+
+else if ($("input[name=2]:checked").val() == "Correct"){
+	correctAnswers++
+	}
+
+else {	wrongAnswers++
+	}
+
+if ($("input[name=3]:checked").val() == undefined){
+	 unanswered++ 
+		}
+
+else if ($("input[name=3]:checked").val() == "Correct"){
+	correctAnswers++
+	}
+
+else {	wrongAnswers++
+	}
+
+if ($("input[name=4]:checked").val() == undefined){
+	 unanswered++ 
+		}
+
+else if ($("input[name=4]:checked").val() == "Correct"){
+	correctAnswers++
+	}
+
+else {	wrongAnswers++
+	}
+
+if ($("input[name=5]:checked").val() == undefined){
+	 unanswered++ 
+		}
+
+else if ($("input[name=5]:checked").val() == "Correct"){
+	correctAnswers++
+	}
+
+else {	wrongAnswers++
+	}
+
+if ($("input[name=6]:checked").val() == undefined){
+	 unanswered++ 
+		}
+
+else if ($("input[name=6]:checked").val() == "Correct"){
+	correctAnswers++
+	}
+
+else {	wrongAnswers++
+	}
+
+if ($("input[name=7]:checked").val() == undefined){
+	 unanswered++ 
+		}
+
+else if ($("input[name=7]:checked").val() == "Correct"){
+	correctAnswers++
+	}
+
+else {	wrongAnswers++
+	}
+
+if ($("input[name=8]:checked").val() == undefined){
+	 unanswered++ 
+		}
+
+else if ($("input[name=8]:checked").val() == "Correct"){
+	correctAnswers++
+	}
+
+else {	wrongAnswers++
+	}
+
+$("#unanswered").html(unanswered);
+$("#correct").html(correctAnswers);
+$("#wrong").html(wrongAnswers);
+}
+
+var correctAnswers = 0;
+var wrongAnswers = 0;
+var unanswered = 0;
+
+
+var counter;
+var number = 60;
+
+
+
+//The counter function - run, decrement, stop and reset. 
+function runCounter(){
+            counter = setInterval(decrement, 1000);
+            
+        }
+
+     function decrement(){
+            // Decrease number by one.
+            number--;
+            // Show the number in the #show-number tag.
+            $('#show-number').html('<h2>' + number + '</h2>');
+
+            // Once number hits zero...
+            if (number === 0){
+                // ...run the stop function.
+                stop();
+                showResult();
+
+            }
+        }
+     function stop(){
+            // Clears our "counter" interval.
+            // We just pass the name of the interval
+            // to the clearInterval function.
+            clearInterval(counter);
+        }
+
+runCounter();
+
+
+</script>
+
+
+
+
+
+
+
+</body></html>
